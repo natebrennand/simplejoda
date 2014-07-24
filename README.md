@@ -14,7 +14,20 @@ Joda time formatters will be returned by the constructors.
 Several constants will be provided.
 
 
+### Example with ISO 8601 GMT
+
+Turn this:
+```scala
+val DTFormat: DateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+```
+
+Into this:
+```scala
+val DTFormat: DateTimeFormatter = simplejoda.format("2006-01-02T15:04:05.000Z")
+```
+
+
+
 
 (This libraries's API is heavily inspired by Golang's dead-simple [datetime library](http://golang.org/pkg/time/))
-
 
