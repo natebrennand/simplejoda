@@ -16,6 +16,19 @@ class parseTest extends FunSuite {
     assert(example.toString(form) == pattern)
   }
 
+  test("handle empty format throws exception") {
+    intercept[Exception] {
+      testFormat("")
+    }
+  }
+
+  test("general punctuation handling") {
+    testFormat(".")
+    testFormat("-")
+    testFormat(":")
+    testFormat(" ")
+  }
+
   test("Handle year, both short and long") {
     testFormat("06")
     testFormat("2006")
@@ -26,12 +39,6 @@ class parseTest extends FunSuite {
     intercept[Exception] {
       testFormat("1999")
     }
-  }
-
-  test("general punctuation handling") {
-    testFormat("-")
-    testFormat(":")
-    testFormat(" ")
   }
 
   test("handle short, long and numerical months") {
@@ -81,5 +88,13 @@ class parseTest extends FunSuite {
     testFormat("Z")
     testFormat("T")
   }
-}
 
+  test("small combinations") {
+    testFormat("15:04")
+  }
+
+  test("ISO 8601 GMT") {
+    // Mon Jan 2 15:04:05 MST 2006
+    testFormat("2006-01-02T15:04:05.000Z")
+  }
+}
