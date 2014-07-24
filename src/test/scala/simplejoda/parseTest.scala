@@ -3,13 +3,13 @@ package simplejoda
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
-import org.joda.time.DateTime
+import org.joda.time.{DateTimeZone, DateTime}
 
 @RunWith(classOf[JUnitRunner])
 class parseTest extends FunSuite {
 
   // Mon Jan 2 15:04:05 MST 2006
-  val example = new DateTime(2006, 1, 2, 15, 4, 5, 0)
+  val example = new DateTime(2006, 1, 2, 15, 4, 5, 0, DateTimeZone.forID("MST"))
 
   private def testFormat(pattern: String) = {
     val form = simplejoda.format(pattern)
@@ -27,6 +27,7 @@ class parseTest extends FunSuite {
     testFormat("-")
     testFormat(":")
     testFormat(" ")
+    testFormat("/")
   }
 
   test("Handle year, both short and long") {
@@ -87,6 +88,15 @@ class parseTest extends FunSuite {
   test("handle literals") {
     testFormat("Z")
     testFormat("T")
+  }
+
+  test("handle time zone string") {
+    testFormat("MST")
+  }
+
+  test("handle time zone offset") {
+    testFormat("-07:00")
+    testFormat("-0700")
   }
 
   test("small combinations") {
