@@ -15,3 +15,6 @@ Several constants will be provided.
 
 
 
+(This libraries's API is heavily inspired by Golang's dead-simple [datetime library](http://golang.org/pkg/time/))
+
+
