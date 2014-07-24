@@ -23,8 +23,5 @@ class parseTest extends FunSuite {
       testFormat("2005")
     }
   }
-
-  test("beak") {
-  }
 }
 
