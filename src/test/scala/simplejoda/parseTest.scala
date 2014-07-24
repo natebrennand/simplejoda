@@ -33,7 +33,6 @@ class parseTest extends FunSuite {
   test("Handle year, both short and long") {
     testFormat("06")
     testFormat("2006")
-    // fail on invalid years
     intercept[Exception] {
       testFormat("2005")
     }
@@ -62,13 +61,15 @@ class parseTest extends FunSuite {
   test("handle day of the month") {
     testFormat("2")
     testFormat("02")
-    intercept[Exception] {
-      testFormat("03")
-    }
   }
 
   test("handle hour of day") {
     testFormat("15")
+    testFormat("03")
+    testFormat("03PM")
+    testFormat("03 PM")
+    testFormat("3")
+    testFormat("3 PM")
   }
 
   test("handle minute of hour") {
@@ -79,10 +80,16 @@ class parseTest extends FunSuite {
     testFormat("05")
   }
 
-  test("handle millisecond") {
+  test("handle second decimal") {
     testFormat("0")
     testFormat("00")
     testFormat("000")
+    testFormat("0000")
+    testFormat("00000")
+    testFormat("000000")
+    testFormat("0000000")
+    testFormat("00000000")
+    testFormat("000000000")
   }
 
   test("handle literals") {
@@ -99,7 +106,14 @@ class parseTest extends FunSuite {
     testFormat("-0700")
   }
 
-  test("small combinations") {
+  test("handle era") {
+    testFormat("AD")
+    intercept[Exception]{
+      testFormat("BC")
+    }
+  }
+
+ test("small combinations") {
     testFormat("15:04")
   }
 
