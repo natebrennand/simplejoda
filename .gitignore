@@ -1,0 +1,8 @@
+
+# IDE shit
+.idea
+*.iml
+
+# maven build stuff
+target
+
